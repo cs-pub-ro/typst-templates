@@ -12,6 +12,10 @@ RUN usermod -aG sudo ubuntu && \
     chmod 440 /etc/sudoers.d/ubuntu
 
 # From here on, run as 'ubuntu'
+RUN mkdir -p /vscode && chown ubuntu:ubuntu /vscode && \
+    mkdir -p /root/lib/glibc/lib && chmod -R a+rX /root && \
+    ln -s /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2 /root/lib/glibc/lib/ld-linux-x86-64.so.2
+
 USER ubuntu
 WORKDIR /home/ubuntu
 
