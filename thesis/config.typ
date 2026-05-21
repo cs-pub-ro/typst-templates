@@ -9,7 +9,7 @@
 #let thesis_type = "bachelor"
 
 // Department: "cti" | "acse" | "aii"
-#let department  = "cti"
+#let department  = "aii"
 
 // Document language: "ro" | "en"
 #let language    = "en"
