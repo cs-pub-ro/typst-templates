@@ -19,10 +19,22 @@
               bashInteractive
               busybox
               coreutils
+              git                 # used by typst for version metadata and by users
               typst
               fontconfig
-              dejavu_fonts
               stdenv.cc
+
+              # ---- Fonts ----------------------------------------------------
+              # The thesis template requests "Times New Roman" (serif) and
+              # "Courier New" (monospace). Those are proprietary Microsoft fonts
+              # and cannot be redistributed in the image. The Liberation family
+              # is metric-compatible (same glyph widths/metrics), so documents
+              # render with the intended layout and full Romanian-diacritic
+              # coverage. To use the *exact* Microsoft fonts, install them
+              # yourself (see README) or swap the font names in thesis/main.typ.
+              liberation_ttf      # Liberation Serif/Mono/Sans (Times/Courier/Arial metric clones)
+              dejavu_fonts        # broad Unicode fallback
+              noto-fonts          # extra Unicode coverage fallback
             ];
             pathsToLink = [ "/bin" "/share" ];
           };

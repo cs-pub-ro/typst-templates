@@ -34,11 +34,22 @@
 )
 
 
-// ---------- Headings manually numbered in title ----------
+// ---------- Heading numbering ----------
+// Native Typst numbering: chapters (level 1) -> "1", sections "1.1", etc.
+// Front-matter headings (Abstract, Contents, Bibliography, Appendices) are
+// created with `numbering: none` so they are NOT counted (see below).
+#set heading(numbering: "1.1.")
+
+// `it.numbering != none` is true only for the numbered chapters; for those we
+// prepend the auto-generated counter, otherwise we render the title alone.
 #show heading.where(level: 1): it => {
   set text(size: 20pt, weight: "bold")
   set par(justify: false)
   v(1.2em, weak: true)
+  if it.numbering != none {
+    counter(heading).display(it.numbering)
+    h(0.4em)
+  }
   it.body
   v(0.6em, weak: true)
 }
@@ -47,6 +58,10 @@
   set text(size: 16pt, weight: "bold")
   set par(justify: false)
   v(0.8em, weak: true)
+  if it.numbering != none {
+    counter(heading).display(it.numbering)
+    h(0.4em)
+  }
   it.body
   v(0.4em, weak: true)
 }
@@ -55,6 +70,10 @@
   set text(size: 14pt, weight: "bold")
   set par(justify: false)
   v(0.6em, weak: true)
+  if it.numbering != none {
+    counter(heading).display(it.numbering)
+    h(0.4em)
+  }
   it.body
   v(0.3em, weak: true)
 }
@@ -195,7 +214,7 @@
 //  Abstract / Rezumat
 // ============================================================
 
-= #t("label_abstract")
+#heading(numbering: none)[#t("label_abstract")]
 
 #include "chapters/abstract.typ"
 
@@ -204,7 +223,7 @@
 //  1. Introducere / Introduction
 // ============================================================
 
-= 1. #t("ch_intro")
+= #t("ch_intro")
 
 #include "chapters/introduction.typ"
 
@@ -213,7 +232,7 @@
 //  2. Fundament teoretic / Theoretical background
 // ============================================================
 
-= 2. #t("ch_theory")
+= #t("ch_theory")
 
 #include "chapters/background.typ"
 
@@ -222,7 +241,7 @@
 //  3. Arhitectură / Architecture
 // ============================================================
 
-= 3. #t("ch_arch")
+= #t("ch_arch")
 
 #include "chapters/architecture.typ"
 
@@ -231,7 +250,7 @@
 //  4. Implementare / Implementation
 // ============================================================
 
-= 4. #t("ch_impl")
+= #t("ch_impl")
 
 #include "chapters/implementation.typ"
 
@@ -240,7 +259,7 @@
 //  5. Evaluare / Evaluation
 // ============================================================
 
-= 5. #t("ch_eval")
+= #t("ch_eval")
 
 #include "chapters/evaluation.typ"
 
@@ -249,7 +268,7 @@
 //  6. Discuții / Discussion
 // ============================================================
 
-= 6. #t("ch_discussion")
+= #t("ch_discussion")
 
 #include "chapters/discussion.typ"
 
@@ -258,7 +277,7 @@
 //  7. Concluzii / Conclusions
 // ============================================================
 
-= 7. #t("ch_conclusions")
+= #t("ch_conclusions")
 
 #include "chapters/conclusions.typ"
 
@@ -280,6 +299,6 @@
 //  Anexe / Appendices
 // ============================================================
 
-= #t("label_appendices")
+#heading(numbering: none)[#t("label_appendices")]
 
 #include "chapters/appendices/appendix_1.typ"

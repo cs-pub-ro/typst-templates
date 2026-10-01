@@ -36,5 +36,17 @@ RUN nix build .#typst-runtime --out-link /tmp/typst-runtime && \
 # Use Typst runtime tools first, then Nix profile, then base PATH
 ENV PATH=/home/ubuntu/.typst-runtime/bin:${PATH}
 
+# Make the fonts shipped in the runtime closure (Liberation, DejaVu, Noto)
+# discoverable by both fontconfig and Typst.
+ENV TYPST_FONT_PATHS=/home/ubuntu/.typst-runtime/share/fonts
+RUN fc-cache -f /home/ubuntu/.typst-runtime/share/fonts || true
+
+# Typst package cache directory. The external presentation packages (touying,
+# cetz, fletcher, numbly, theorion) are downloaded here on the first
+# `typst compile thesis/presentation.typ` and reused for the life of the
+# container.
+ENV XDG_CACHE_HOME=/home/ubuntu/.cache
+RUN mkdir -p /home/ubuntu/.cache/typst
+
 WORKDIR /workspace
 CMD ["bash"]

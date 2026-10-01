@@ -9,6 +9,7 @@
   "updateRemoteUserUID": true,
   "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
   "workspaceFolder": "/workspace",
+  "postCreateCommand": "typst --version || true; echo 'Typst dev container ready. Run: ./scripts/check-all.sh'",
   "customizations": {
     "vscode": {
       "extensions": [

@@ -4,21 +4,36 @@
 // ============================================================
 
 // ---------------------- User configuration ----------------------
+//
+// Every value below can be overridden at compile time from the command line
+// WITHOUT editing this file, e.g.:
+//
+//   typst compile --root . \
+//     --input thesis_type=master \
+//     --input language=ro \
+//     --input department=acse \
+//     thesis/main.typ build/thesis.pdf
+//
+// This is what `scripts/check-matrix.sh` uses to test all combinations while
+// leaving config.typ untouched. The defaults here apply for a normal build.
+
+// Small helper: read an override from `sys.inputs`, otherwise use a default.
+#let _opt(key, default) = sys.inputs.at(key, default: default)
 
 // Thesis type: "bachelor" | "master" | "phd"
-#let thesis_type = "bachelor"
+#let thesis_type = _opt("thesis_type", "bachelor")
 
 // Department: "cti" | "acse" | "aii"
-#let department  = "cti"
+#let department  = _opt("department", "cti")
 
 // Document language: "ro" | "en"
-#let language    = "en"
+#let language    = _opt("language", "en")
 
 // Basic metadata
-#let thesis_title = "Titlu lucrare"
-#let supervisor   = "Ștefan-Dan Ciocîrlan"
-#let student      = "El Studento"
-#let year         = "2026"
+#let thesis_title = _opt("thesis_title", "Titlu lucrare")
+#let supervisor   = _opt("supervisor", "Ștefan-Dan Ciocîrlan")
+#let student      = _opt("student", "El Studento")
+#let year         = _opt("year", "2026")
 
 // Backwards-compatible aliases (for existing main.typ usage)
 #let title       = thesis_title

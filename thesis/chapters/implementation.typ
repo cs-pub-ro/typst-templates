@@ -1,5 +1,7 @@
 #import "../prelude.typ": *
 
+Acest text este un ghid de redactare. Ștergeți-l înainte de predare și scrieți conținutul vostru.
+
    IMPLEMENTATION CHAPTER - WRITING GUIDE (paragraph by paragraph)
 
    P1. Implementation overview
